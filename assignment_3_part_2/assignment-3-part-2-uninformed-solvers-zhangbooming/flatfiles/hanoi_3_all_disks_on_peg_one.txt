@@ -1,0 +1,36 @@
+"""
+For a game where there are 3 disks,
+write down the Facts and Rules to model the game state where 
+all disks are on peg1.
+
+        |            |            |
+        |            |            |
+       -|- disk1     |            |
+      --|-- disk2    |            |
+     ---|---         |            |
+==========================================
+       peg1         peg2         peg3
+       
+Example: 
+fact: (pred obj1 obj2)
+rule: ((pred obj1 obj2) (pred obj2 obj3)) -> (pred obj1 obj3)
+
+"""
+fact: (LARGER disk3 disk2)
+fact: (LARGER disk2 disk1)
+
+fact: (on disk1 peg1)
+fact: (on disk2 peg1)
+fact: (on disk3 peg1)
+
+fact: (TOP disk1 peg1)
+fact: (EMPTY peg2)
+fact: (EMPTY peg3)
+
+rule: ((LARGER ?x ?y) (LARGER ?y ?z)) -> (LARGER ?x ?z)
+rule: ((TOP ?x ?pegA) (EMPTY ?pegB)) -> (movable ?x ?pegA ?pegB)
+rule: ((TOP ?x ?pegA) (TOP ?y ?pegB) (LARGER ?y ?x)) -> (movable ?x ?pegA ?pegB)
+
+
+
+
